@@ -3,8 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Button.css';
 
-const Button = ({ label, onClick }) => (
-    <button className="button" onClick={onClick}>
+const Button = ({ label, onClick ,id}) => (
+    <button id = {`${id}`} className="button" onClick={onClick}>
         {label}
     </button>
 );

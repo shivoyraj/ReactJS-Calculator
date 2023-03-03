@@ -1,17 +1,23 @@
+h1{
+  margin-top: 5vh;
+  text-align: center;
+  color: #964747;
+}
+
 .calculator {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 300px;
-  margin: 0 auto;
+  margin: 10vh auto;
 }
 
 .button-row {
   display: flex;
+  justify-content: center;
 }
 
 button {
@@ -43,13 +49,4 @@ button:active {
   width: 100%;
   box-sizing: border-box;
   height: 60px;
-}
-
-.button-row:last-child button {
-  background-color: #f44336;
-  color: #fff;
-}
-
-.button-row:last-child button:hover {
-  background-color: #d32f2f;
 }
