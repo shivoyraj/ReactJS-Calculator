@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Display from '../display/Display';
 import Button from '../button/Button';
 import './Calculator.css';
@@ -14,7 +14,6 @@ const Calculator = () => {
 
   const handleBackSpaceButtonClick = () => {
     let result = '';
-    console.log(errorMsg);
     if (!errorMsg) {
       result = input.slice(0, input.length - 1);
     }
@@ -29,23 +28,20 @@ const Calculator = () => {
 
   const handleCalculateButtonClick = () => {
     try {
-      if (input.includes('/0')) {
+      const result = eval(input);
+      if(result == 'Infinity'){
         throw new Error("Can't divided by Zero");
       }
-      const result = eval(input);
       setErrorMsg('');
       setInput(result.toString());
     } catch (error) {
       const errorMessage = error.toString().split(':')[1].trim();
-      console.log(errorMessage);
-      console.log(errorMessage == "Can't divided by Zero");
       if (errorMessage == "Can't divided by Zero") {
         setErrorMsg(errorMessage);
         setInput(errorMessage);
       }
     }
   };
-
 
   return (
     <>
