@@ -7,9 +7,11 @@ const Calculator = () => {
 
   const [input, setInput] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
+  const [badInput, setBadInput] = useState(false);
 
   const handleButtonClick = (value) => {
-    setInput((prevInput) => prevInput + value);
+    if(!errorMsg)
+      setInput((prevInput) => prevInput + value);
   };
 
   const handleBackSpaceButtonClick = () => {
@@ -18,28 +20,36 @@ const Calculator = () => {
       result = input.slice(0, input.length - 1);
     }
     setErrorMsg('');
+    setBadInput(false);
     setInput(result);
   };
 
   const handleClearButtonClick = () => {
     setErrorMsg('');
     setInput('');
+    setBadInput(false);
   };
 
   const handleCalculateButtonClick = () => {
     try {
-      const result = eval(input);
-      if(result == 'Infinity'){
+      // if input contains '%' in end will consider as '/100'
+      // else if input contains '%' in end will consider as '/100*'
+      let parsedInput = input.replace(/%$/, "/100").replace(/%/g, "/100*");
+      console.log(parsedInput);
+      const result = eval(parsedInput);
+      if (result == 'Infinity') {
         throw new Error("Can't divided by Zero");
       }
       setErrorMsg('');
       setInput(result.toString());
+      setBadInput(false);
     } catch (error) {
       const errorMessage = error.toString().split(':')[1].trim();
       if (errorMessage == "Can't divided by Zero") {
         setErrorMsg(errorMessage);
         setInput(errorMessage);
       }
+      setBadInput(true);
     }
   };
 
@@ -47,7 +57,7 @@ const Calculator = () => {
     <>
       <h1>Simple Calculator</h1>
       <div className="calculator">
-        <Display value={input} />
+        <Display value={input} isError={badInput} />
         <div className="button-row">
           <Button id="ac" label="AC" onClick={() => handleClearButtonClick()} />
           <Button label="X" onClick={() => handleBackSpaceButtonClick()} />

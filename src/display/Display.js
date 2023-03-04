@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function Display(props) {
     return (
         <input
-            className="display"
+            className={`display ${props.isError ? ' error' : ''}`}
             type="text"
             value={props.value}
             readOnly

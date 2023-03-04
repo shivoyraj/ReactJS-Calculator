@@ -61,3 +61,7 @@ button:active {
   box-sizing: border-box;
   height: 60px;
 }
+
+.error {
+  color: red;
+}
