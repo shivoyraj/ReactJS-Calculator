@@ -10,7 +10,7 @@ const Calculator = () => {
   const [badInput, setBadInput] = useState(false);
 
   const handleButtonClick = (value) => {
-    if(!errorMsg)
+    if (!errorMsg)
       setInput((prevInput) => prevInput + value);
   };
 
@@ -33,7 +33,7 @@ const Calculator = () => {
   const handleCalculateButtonClick = () => {
     try {
       // if input contains '%' in end will consider as '/100'
-      // else if input contains '%' in end will consider as '/100*'
+      // else if input contains '%' in between will consider as '/100*'
       let parsedInput = input.replace(/%$/, "/100").replace(/%/g, "/100*");
       console.log(parsedInput);
       const result = eval(parsedInput);
